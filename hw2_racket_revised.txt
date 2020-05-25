@@ -1,0 +1,25 @@
+(define (funcWinHelper f xs) ;line 9
+  (if (empty? xs) 0 
+  (if (f (first xs))
+      (+ 1 (funcWinHelper f (rest xs)))
+      (funcWinHelper f (rest xs)))))
+
+(define (functionWinner f l m) //calls set of lists and bool
+  (let ((lnum (count_true f l)) //sets lnum and mnum for l & m
+        (mnum (count_true f m)))
+    (cond ((= lnum mnum) 0) //checks for empty string
+          ((> lnum mnum) 1)
+          (else 2))))
+
+
+//posted solution for helper
+//implements the boolean call
+(define (count_true f xs)
+  (cond ((empty? xs) 0)
+        ((f (first xs)) (add1 (count_true f (rest xs))))
+        (else (count_true f (rest xs)))))
+
+//posted solution
+(functionWinner negative? '(8 -4 3 8) '(7 -3 -2 1 -5))
+(functionWinner negative? '(7 -3 -2 1 -5) '(8 -4 3 8))
+(functionWinner negative? '(7 3 2 1 -5) '(8 -4 3 8))
